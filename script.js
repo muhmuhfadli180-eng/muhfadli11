@@ -1,56 +1,43 @@
-// ========================================
-// URL GOOGLE APPS SCRIPT
-// ========================================
+document.addEventListener("DOMContentLoaded", function () {
 
-const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyStRHflpLZCYQ46XSP669rcvdjOxGt7ZnXb5-Afp8Ln1U_7w4S3T2U1eA-7-mv-ybHpA/exec";
+    const form = document.getElementById("guestbookForm");
+    const status = document.getElementById("status");
+    const messageList = document.getElementById("messageList");
 
-
-// ========================================
-// ELEMENT
-// ========================================
-
-const form =
-    document.getElementById("guestbookForm");
-
-const status =
-    document.getElementById("status");
-
-const submitBtn =
-    document.getElementById("submitBtn");
-
-const messageList =
-    document.getElementById("messageList");
-
-
-// ========================================
-// TAMPILKAN PESAN
-// ========================================
-
-async function tampilkanPesan() {
-
-    if (!messageList) {
+    /*
+     * Halaman index.html tidak memiliki form buku tamu,
+     * jadi script langsung berhenti.
+     */
+    if (!form) {
         return;
     }
 
-    try {
 
-        const response =
-            await fetch(SCRIPT_URL);
+    /* =========================
+       DATA PESAN
+    ========================= */
 
-        const data =
-            await response.json();
+    let messages =
+        JSON.parse(
+            localStorage.getItem("guestbookMessages")
+        ) || [];
 
 
-        messageList.innerHTML = "";
+    /* =========================
+       TAMPILKAN PESAN
+    ========================= */
 
+    function tampilkanPesan() {
 
-        if (data.length === 0) {
+        if (!messageList) {
+            return;
+        }
+
+        if (messages.length === 0) {
 
             messageList.innerHTML = `
                 <p class="loading">
                     Belum ada pesan.
-                    Jadilah yang pertama! 😊
                 </p>
             `;
 
@@ -58,92 +45,73 @@ async function tampilkanPesan() {
         }
 
 
-        data.reverse().forEach(function(item) {
+        messageList.innerHTML = "";
+
+
+        messages.forEach(function (message) {
 
             const card =
                 document.createElement("div");
 
-            card.className =
-                "message-card";
+            card.className = "message-card";
 
 
-            card.innerHTML = `
-                <h3>
-                    👤 ${escapeHTML(item.nama)}
-                </h3>
+            const nama =
+                document.createElement("h3");
 
-                <small>
-                    📧 ${escapeHTML(item.email)}
-                </small>
+            nama.textContent =
+                message.nama;
 
-                <p>
-                    ${escapeHTML(item.pesan)}
-                </p>
-            `;
 
+            const waktu =
+                document.createElement("small");
+
+            waktu.textContent =
+                message.waktu;
+
+
+            const pesan =
+                document.createElement("p");
+
+            pesan.textContent =
+                message.pesan;
+
+
+            card.appendChild(nama);
+            card.appendChild(waktu);
+            card.appendChild(pesan);
 
             messageList.appendChild(card);
 
         });
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        messageList.innerHTML = `
-            <p class="loading error">
-                ❌ Gagal memuat pesan.
-            </p>
-        `;
-
     }
 
-}
 
-
-// ========================================
-// KIRIM PESAN
-// ========================================
-
-if (form) {
+    /* =========================
+       KIRIM PESAN
+    ========================= */
 
     form.addEventListener(
         "submit",
-        async function(event) {
+        function (event) {
 
             event.preventDefault();
 
 
             const nama =
-                document
-                .getElementById("nama")
-                .value
-                .trim();
-
+                document.getElementById("nama").value.trim();
 
             const email =
-                document
-                .getElementById("email")
-                .value
-                .trim();
-
+                document.getElementById("email").value.trim();
 
             const pesan =
-                document
-                .getElementById("pesan")
-                .value
-                .trim();
+                document.getElementById("pesan").value.trim();
 
 
-            if (
-                !nama ||
-                !email ||
-                !pesan
-            ) {
+            if (!nama || !email || !pesan) {
 
                 status.textContent =
-                    "❌ Semua kolom harus diisi.";
+                    "Mohon lengkapi semua data.";
 
                 status.className =
                     "status error";
@@ -152,109 +120,51 @@ if (form) {
             }
 
 
-            submitBtn.disabled = true;
+            const dataBaru = {
 
-            submitBtn.textContent =
-                "⏳ Mengirim...";
+                nama: nama,
+
+                email: email,
+
+                pesan: pesan,
+
+                waktu:
+                    new Date().toLocaleString(
+                        "id-ID",
+                        {
+                            dateStyle: "medium",
+                            timeStyle: "short"
+                        }
+                    )
+            };
+
+
+            messages.unshift(dataBaru);
+
+
+            localStorage.setItem(
+                "guestbookMessages",
+                JSON.stringify(messages)
+            );
 
 
             status.textContent =
-                "Sedang mengirim pesan...";
+                "Pesan berhasil dikirim! 😊";
 
             status.className =
-                "status";
+                "status success";
 
 
-            try {
-
-                await fetch(
-                    SCRIPT_URL,
-                    {
-
-                        method: "POST",
-
-                        mode: "no-cors",
-
-                        headers: {
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-                        },
-
-                        body: JSON.stringify({
-
-                            nama: nama,
-
-                            email: email,
-
-                            pesan: pesan
-
-                        })
-
-                    }
-                );
+            form.reset();
 
 
-                status.textContent =
-                    "✅ Pesan berhasil dikirim!";
-
-                status.className =
-                    "status success";
-
-
-                form.reset();
-
-
-                // Tunggu sebentar,
-                // lalu ambil data terbaru
-
-                setTimeout(
-                    tampilkanPesan,
-                    1000
-                );
-
-
-            } catch (error) {
-
-                console.error(error);
-
-                status.textContent =
-                    "❌ Gagal mengirim pesan.";
-
-                status.className =
-                    "status error";
-
-            }
-
-
-            submitBtn.disabled = false;
-
-            submitBtn.textContent =
-                "📩 Kirim Pesan";
+            tampilkanPesan();
 
         }
     );
 
-}
 
+    /* Tampilkan pesan saat halaman dibuka */
+    tampilkanPesan();
 
-// ========================================
-// MENCEGAH HTML INJECTION
-// ========================================
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement("div");
-
-    div.textContent =
-        text;
-
-    return div.innerHTML;
-}
-
-
-// ========================================
-// LOAD PESAN SAAT HALAMAN DIBUKA
-// ========================================
-
-tampilkanPesan();
+});
