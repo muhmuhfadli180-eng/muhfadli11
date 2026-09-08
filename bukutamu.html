@@ -21,16 +21,11 @@
 
 <body>
 
-    <!-- BACKGROUND -->
-
     <div class="background"></div>
 
     <div class="blob blob1"></div>
-
     <div class="blob blob2"></div>
 
-
-    <!-- KARTU -->
 
     <div class="card guestbook">
 
@@ -53,8 +48,7 @@
 
 
         <p class="guestbook-desc">
-            Silakan isi nama dan pesan kamu
-            untuk meninggalkan jejak di website saya.
+            Tinggalkan pesan untuk saya 😊
         </p>
 
 
@@ -62,8 +56,6 @@
 
         <form id="guestbookForm">
 
-
-            <!-- NAMA -->
 
             <div class="form-group">
 
@@ -74,15 +66,12 @@
                 <input
                     type="text"
                     id="nama"
-                    name="nama"
                     placeholder="Masukkan nama kamu"
                     required
                 >
 
             </div>
 
-
-            <!-- EMAIL -->
 
             <div class="form-group">
 
@@ -93,15 +82,12 @@
                 <input
                     type="email"
                     id="email"
-                    name="email"
                     placeholder="Masukkan email kamu"
                     required
                 >
 
             </div>
 
-
-            <!-- PESAN -->
 
             <div class="form-group">
 
@@ -111,15 +97,12 @@
 
                 <textarea
                     id="pesan"
-                    name="pesan"
                     placeholder="Tulis pesan kamu..."
                     required
                 ></textarea>
 
             </div>
 
-
-            <!-- BUTTON -->
 
             <button
                 type="submit"
@@ -130,29 +113,30 @@
             </button>
 
 
-            <!-- NOTIFIKASI -->
-
             <div
                 id="status"
                 class="status"
             ></div>
 
-
         </form>
 
 
-        <!-- INFO -->
+        <!-- PESAN PENGUNJUNG -->
 
         <div class="messages">
 
             <h2>
-                💬 Terima Kasih
+                💬 Pesan Pengunjung
             </h2>
 
-            <p>
-                Pesan kamu akan langsung tersimpan
-                ke Google Spreadsheet.
-            </p>
+
+            <div id="messageList">
+
+                <p class="loading">
+                    ⏳ Memuat pesan...
+                </p>
+
+            </div>
 
         </div>
 
