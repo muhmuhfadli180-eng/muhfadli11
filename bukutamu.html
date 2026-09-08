@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Buku Tamu - Muh. Fadli</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+
+    <div class="background"></div>
+
+    <div class="blob blob1"></div>
+
+    <div class="blob blob2"></div>
+
+
+    <!-- KARTU -->
+
+    <div class="card guestbook">
+
+        <a
+            href="index.html"
+            class="back-btn"
+        >
+            ← Kembali
+        </a>
+
+
+        <p class="welcome">
+            BUKU TAMU DIGITAL
+        </p>
+
+
+        <h1>
+            📖 Buku Tamu
+        </h1>
+
+
+        <p class="guestbook-desc">
+            Silakan isi nama dan pesan kamu
+            untuk meninggalkan jejak di website saya.
+        </p>
+
+
+        <!-- FORM -->
+
+        <form id="guestbookForm">
+
+
+            <!-- NAMA -->
+
+            <div class="form-group">
+
+                <label for="nama">
+                    Nama
+                </label>
+
+                <input
+                    type="text"
+                    id="nama"
+                    name="nama"
+                    placeholder="Masukkan nama kamu"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Masukkan email kamu"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PESAN -->
+
+            <div class="form-group">
+
+                <label for="pesan">
+                    Pesan
+                </label>
+
+                <textarea
+                    id="pesan"
+                    name="pesan"
+                    placeholder="Tulis pesan kamu..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+            >
+                📩 Kirim Pesan
+            </button>
+
+
+            <!-- NOTIFIKASI -->
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+        </form>
+
+
+        <!-- INFO -->
+
+        <div class="messages">
+
+            <h2>
+                💬 Terima Kasih
+            </h2>
+
+            <p>
+                Pesan kamu akan langsung tersimpan
+                ke Google Spreadsheet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
