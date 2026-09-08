@@ -69,7 +69,7 @@ body {
 
 
 /* =========================
-   CAHAYA / BLOB
+   CAHAYA
 ========================= */
 
 .blob {
@@ -119,7 +119,7 @@ body {
 
 
 /* =========================
-   KARTU UTAMA PORTOFOLIO
+   KARTU
 ========================= */
 
 .card {
@@ -167,7 +167,7 @@ body {
 
 
 /* =========================
-   JUDUL / WELCOME
+   WELCOME
 ========================= */
 
 .welcome {
@@ -204,7 +204,8 @@ body {
         #ec4899
     );
 
-    animation: photo 3s ease-in-out infinite;
+    animation:
+        photo 3s ease-in-out infinite;
 }
 
 .profile img {
@@ -298,6 +299,46 @@ h1 {
 
 
 /* =========================
+   TOMBOL BUKU TAMU
+========================= */
+
+.guestbook-btn {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 11px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #06b6d4,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color: white;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.guestbook-btn:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(124, 58, 237, 0.35);
+}
+
+
+/* =========================
    TENTANG
 ========================= */
 
@@ -375,49 +416,7 @@ h1 {
 ========================= */
 
 .guestbook {
-    width: 100%;
-
     max-width: 500px;
-}
-
-
-/* =========================
-   TOMBOL BUKU TAMU
-========================= */
-
-.guestbook-btn {
-    display: inline-block;
-
-    margin-top: 20px;
-
-    padding: 11px 20px;
-
-    background: linear-gradient(
-        135deg,
-        #06b6d4,
-        #8b5cf6,
-        #ec4899
-    );
-
-    color: white;
-
-    border-radius: 20px;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    transition: 0.3s;
-}
-
-.guestbook-btn:hover {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(124, 58, 237, 0.35);
 }
 
 
@@ -472,7 +471,7 @@ h1 {
 
 
 /* =========================
-   FORM BUKU TAMU
+   FORM
 ========================= */
 
 .form-group {
@@ -623,7 +622,7 @@ h1 {
 
 
 /* =========================
-   LOADING PESAN
+   LOADING
 ========================= */
 
 .loading {
@@ -638,7 +637,7 @@ h1 {
 
 
 /* =========================
-   KARTU PESAN PENGUNJUNG
+   PESAN PENGUNJUNG
 ========================= */
 
 .message-card {
@@ -716,7 +715,7 @@ h1 {
 
 
 /* =========================
-   RESPONSIVE HP
+   RESPONSIVE
 ========================= */
 
 @media (max-width: 500px) {
@@ -739,10 +738,6 @@ h1 {
     }
 
     h1 {
-        font-size: 28px;
-    }
-
-    .guestbook h1 {
         font-size: 28px;
     }
 
