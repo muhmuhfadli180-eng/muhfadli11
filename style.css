@@ -634,3 +634,282 @@ h1 {
     }
 
 }
+/* =========================
+   BUKU TAMU
+========================= */
+
+.guestbook {
+    max-width: 500px;
+}
+
+
+/* TOMBOL BUKU TAMU */
+
+.guestbook-btn {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 11px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #06b6d4,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color: white;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.guestbook-btn:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(124, 58, 237, 0.35);
+}
+
+
+/* KEMBALI */
+
+.back-btn {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    padding: 9px 15px;
+
+    background: #f1f5f9;
+
+    color: #374151;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+
+    background: #ede9fe;
+
+    color: #7c3aed;
+}
+
+
+/* DESKRIPSI */
+
+.guestbook-desc {
+    margin-top: 8px;
+
+    margin-bottom: 25px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* FORM */
+
+.form-group {
+    text-align: left;
+
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    color: #111827;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.3s;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color: #8b5cf6;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px rgba(
+            139,
+            92,
+            246,
+            0.12
+        );
+
+}
+
+.form-group textarea {
+
+    resize: vertical;
+
+    min-height: 120px;
+
+}
+
+
+/* TOMBOL KIRIM */
+
+.submit-btn {
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #06b6d4,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+.submit-btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(
+            124,
+            58,
+            237,
+            0.3
+        );
+
+}
+
+
+/* STATUS */
+
+.status {
+
+    margin-top: 15px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+}
+
+.status.success {
+
+    color: #16a34a;
+
+}
+
+.status.error {
+
+    color: #dc2626;
+
+}
+
+
+/* BAGIAN BAWAH */
+
+.messages {
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+
+}
+
+.messages h2 {
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+
+}
+
+.messages p {
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* HP */
+
+@media (max-width: 500px) {
+
+    .guestbook {
+
+        max-width: 100%;
+    }
+
+}
