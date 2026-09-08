@@ -3,7 +3,7 @@
 // ========================================
 
 const SCRIPT_URL =
-    "MASUKKAN_URL_WEB_APP_KAMU";
+    "https://script.google.com/macros/s/AKfycbyStRHflpLZCYQ46XSP669rcvdjOxGt7ZnXb5-Afp8Ln1U_7w4S3T2U1eA-7-mv-ybHpA/exec";
 
 
 // ========================================
