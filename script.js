@@ -1,16 +1,13 @@
 // ========================================
-// GOOGLE SPREADSHEET DATABASE
+// URL GOOGLE APPS SCRIPT
 // ========================================
-
-
-// GANTI URL INI DENGAN URL WEB APP GAS KAMU
 
 const SCRIPT_URL =
-    "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DISINI";
+    "MASUKKAN_URL_WEB_APP_KAMU";
 
 
 // ========================================
-// FORM BUKU TAMU
+// ELEMENT
 // ========================================
 
 const form =
@@ -22,6 +19,92 @@ const status =
 const submitBtn =
     document.getElementById("submitBtn");
 
+const messageList =
+    document.getElementById("messageList");
+
+
+// ========================================
+// TAMPILKAN PESAN
+// ========================================
+
+async function tampilkanPesan() {
+
+    if (!messageList) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(SCRIPT_URL);
+
+        const data =
+            await response.json();
+
+
+        messageList.innerHTML = "";
+
+
+        if (data.length === 0) {
+
+            messageList.innerHTML = `
+                <p class="loading">
+                    Belum ada pesan.
+                    Jadilah yang pertama! 😊
+                </p>
+            `;
+
+            return;
+        }
+
+
+        data.reverse().forEach(function(item) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "message-card";
+
+
+            card.innerHTML = `
+                <h3>
+                    👤 ${escapeHTML(item.nama)}
+                </h3>
+
+                <small>
+                    📧 ${escapeHTML(item.email)}
+                </small>
+
+                <p>
+                    ${escapeHTML(item.pesan)}
+                </p>
+            `;
+
+
+            messageList.appendChild(card);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        messageList.innerHTML = `
+            <p class="loading error">
+                ❌ Gagal memuat pesan.
+            </p>
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// KIRIM PESAN
+// ========================================
 
 if (form) {
 
@@ -32,21 +115,32 @@ if (form) {
             event.preventDefault();
 
 
-            // Ambil data
-
             const nama =
-                document.getElementById("nama").value.trim();
+                document
+                .getElementById("nama")
+                .value
+                .trim();
+
 
             const email =
-                document.getElementById("email").value.trim();
+                document
+                .getElementById("email")
+                .value
+                .trim();
+
 
             const pesan =
-                document.getElementById("pesan").value.trim();
+                document
+                .getElementById("pesan")
+                .value
+                .trim();
 
 
-            // Validasi
-
-            if (!nama || !email || !pesan) {
+            if (
+                !nama ||
+                !email ||
+                !pesan
+            ) {
 
                 status.textContent =
                     "❌ Semua kolom harus diisi.";
@@ -55,11 +149,8 @@ if (form) {
                     "status error";
 
                 return;
-
             }
 
-
-            // Tombol loading
 
             submitBtn.disabled = true;
 
@@ -75,9 +166,6 @@ if (form) {
 
 
             try {
-
-
-                // Kirim ke Google Apps Script
 
                 await fetch(
                     SCRIPT_URL,
@@ -106,44 +194,67 @@ if (form) {
                 );
 
 
-                // Berhasil
-
                 status.textContent =
-                    "✅ Pesan berhasil dikirim! Terima kasih 😊";
+                    "✅ Pesan berhasil dikirim!";
 
                 status.className =
                     "status success";
 
 
-                // Kosongkan form
-
                 form.reset();
+
+
+                // Tunggu sebentar,
+                // lalu ambil data terbaru
+
+                setTimeout(
+                    tampilkanPesan,
+                    1000
+                );
 
 
             } catch (error) {
 
-
                 console.error(error);
 
-
                 status.textContent =
-                    "❌ Pesan gagal dikirim. Silakan coba lagi.";
+                    "❌ Gagal mengirim pesan.";
 
                 status.className =
                     "status error";
 
-
-            } finally {
-
-
-                submitBtn.disabled = false;
-
-                submitBtn.textContent =
-                    "📩 Kirim Pesan";
-
             }
+
+
+            submitBtn.disabled = false;
+
+            submitBtn.textContent =
+                "📩 Kirim Pesan";
 
         }
     );
 
 }
+
+
+// ========================================
+// MENCEGAH HTML INJECTION
+// ========================================
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+}
+
+
+// ========================================
+// LOAD PESAN SAAT HALAMAN DIBUKA
+// ========================================
+
+tampilkanPesan();
